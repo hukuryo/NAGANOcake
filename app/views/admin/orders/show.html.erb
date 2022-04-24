@@ -1,0 +1,60 @@
+<h4>注文履歴詳細</h4>
+
+<table class="table table-hover table-inverse">
+    <tr>
+      <td><strong>購入者</strong></td><td><%= @orders.name %></td>
+    </tr>
+    <tr>
+      <td><strong>注文日</strong></td><td><%= @orders.created_at %></td>
+    </tr>
+    <tr>
+      <td><strong>配送先</strong></td><td>〒<%= @orders.postal_code %><%= @orders.address %><br><%= @orders.name %></td>
+    </tr>
+    <tr>
+      <td><strong>支払方法</strong></td><td><%= @orders.payment_method_i18n %></td>
+    </tr>
+     <tr>
+      <td><strong>注文ステータス</strong></td><td>入金待ち</td>
+    </tr>
+</table>
+
+<div class="col-md-8 offset-md-1">
+   <table class="table table-hover table-inverse">
+    <thead>
+     <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>製作ステータス</th>
+     </tr>
+    </thead>
+    <% @sum = 0 %>
+    <% @orders.order_details.each do |order| %>
+        <% @sum += (order.item.price * 1.1).floor * order.quantity %>
+    <% end %>
+    
+    <tbody>
+        <% @orders.order_details.each do |order| %>
+        <tr>
+          <td><%= order.item.name %></td>
+          <td><%= (order.item.price * 1.1).floor %></td>
+          <td><%= order.quantity %></td>
+          <td><%= (order.item.price * 1.1).floor * order.quantity %> </td>
+          <td></td>
+        </tr>
+        <% end %>
+    </tbody>
+</div>
+
+<table class="table table-hover table-inverse">
+    <tr>
+      <td><strong>商品合計</strong></td><td><%= @sum %></td>
+    </tr>
+    <tr>
+      <td><strong>送料</strong></td><td><%= @orders.postage %></td>
+    </tr>
+    <tr>
+      <td><strong>請求額合計</strong></td><td><%= @sum + @orders.postage %></td>
+    </tr>
+</table>

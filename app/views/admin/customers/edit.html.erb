@@ -1,0 +1,46 @@
+<h4><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h4>
+
+<%= form_with model: @customer, url: admin_customer_path, local:true do |f| %>
+
+<div class = "form-group">
+<label for="user_image">会員ID</label>
+<%= @customer.id %>
+</div>
+
+<div class="form-group">
+<label for="user_name">氏名</label>
+<%= f.text_field :first_name, class: "form-control name", autofocus: true, placeholder:"性"%>
+<%= f.text_field :last_name, class: "form-control name", autofocus: true, placeholder:"名"%>
+</div>
+
+<div class="form-group">
+<label for="user_name">フリガナ</label>
+<%= f.text_field :first_kana_name, class: "form-control name", autofocus: true, placeholder:"セイ"%>
+<%= f.text_field :last_kana_name, class: "form-control name", autofocus: true, placeholder:"ナマエ"%>
+</div>
+
+<div class="form-group">
+<label for="user_name">郵便番号</label>
+<%= f.text_field :postal_code, class: "form-control name", autofocus: true, placeholder:"ハイフンなし"%>
+</div>
+
+<div class="form-group">
+<label for="user_name">住所</label>
+<%= f.text_field :address, class: "form-control name", autofocus: true, placeholder:"東京都"%>
+</div>
+
+<div class="form-group">
+<label for="user_name">電話番号</label>
+<%= f.text_field :telephone_number, class: "form-control name", autofocus: true, placeholder:"00000"%>
+</div>
+
+<div class="form-group">
+<label for="user_name"></label>メールアドレス</label>
+<%= f.text_field :email, class: "form-control name", autofocus: true, placeholder:"メールアドレス"%>
+</div>
+
+<div class="form-group">
+<%= f.submit "変更を保存", class: "btn btn-sm btn-success" %>
+</div>
+
+<% end %>

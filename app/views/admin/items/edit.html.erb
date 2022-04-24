@@ -1,0 +1,43 @@
+<h4>商品編集</h4>
+
+<%= form_with model: @item, url: admin_item_path(@item), local:true do |f| %>
+
+<%= attachment_image_tag @item, :image, :fill, 20, 20, format: 'jpeg', fallback: "no_image.jpg" %>
+
+<div class="form-group">
+<label for="user_name">商品名</label>
+<%= f.text_field :name, class: "form-control name", autofocus: true, placeholder:"名前"%>
+</div>
+
+<div class="form-group">
+<label for="user_introduction">商品説明</label>
+<%= f.text_area :introduction, class: "form-control name", autofocus: true, placeholder:"ここに説明文を記述します" %>
+</div>
+
+<div class="form-group">
+<label for="user_introduction">ジャンル</label>
+<%= f.select :genre_id, Genre.all.map {|genre| [genre.name, genre.id]} %>
+</div>
+
+<div class="form-group">
+<label for="user_name">税抜き価格</label>
+<%= f.text_field :price, class: "form-control name", autofocus: true, placeholder:"1000" %>
+</div>
+
+<div class="form-group">
+<label for="user_name">販売ステータス</label>
+<div>
+  <%= f.radio_button :is_acactive, true %>
+  <%= f.label :is_acactive, '販売中', value: true %>
+</div>
+<div>
+  <%= f.radio_button :is_acactive, false %>
+  <%= f.label :is_acactive, '販売停止中', value: false %>
+</div>
+</div>
+  
+<div class="form-group">
+<%= f.submit "変更を保存", class: "btn btn-sm btn-success" %>
+</div>
+
+<% end %>
